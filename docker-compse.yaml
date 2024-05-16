@@ -1,0 +1,30 @@
+version: "3.9"
+
+# THE TWO DOCKER COMPOSE MUST OPERATE IN THE SAME NETWORK IN OTHER TO WORK
+
+services:
+
+  # API SERVICE ---------------------------- Authentication Service
+  demandservice:
+    build: ./
+    restart: on-failure
+    container_name: demandservice_c
+    ports:
+      - '3035:3035'
+    environment:
+      - POSTGRES_HOST=micropsql
+      - POSTGRES_DB=psqldockerdb
+      - POSTGRES_USER=psqlusername
+      - POSTGRES_PASSWORD=psqlpassword
+      - POSTGRES_DIALECT=postgres
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    networks:
+      - casestudy
+
+
+networks:
+  casestudy:
+    driver: bridge
+ 

@@ -4,10 +4,10 @@ export const swagger_options = {
     definition: {
       openapi: "3.1.0",
       info: {
-        title: "FINSCROW API Documentation - Secure Escrow Payment Platform",
+        title: "NIYO Assessment API Documentation",
         version: "0.1.0",
         description:
-          "Welcome to the FINSCROW API documentation, your comprehensive guide to integrating with our secure escrow payment platform. FINSCROW offers a robust set of APIs designed to facilitate seamless transactions involving both cryptocurrency and fiat currency, providing developers with the tools they need to build secure and reliable payment solutions for their applications",
+          "These contains the API documentations, data models, and relevant information necessary for understanding and consuming the API",
         license: {
           name: "MIT",
           url: "https://spdx.org/licenses/MIT.html",

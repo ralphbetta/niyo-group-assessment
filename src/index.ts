@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import { Request, Response } from 'express';
 import { serverport } from './config/environment.config';
 import { db } from './models/database.connection';
-
+import approuter from './routes/app.routes';
 
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
@@ -34,7 +34,10 @@ app.get('/', async (req: Request, res: Response) => {
     res.status(200).json('NIYO ASSESSMENT SERVER RUNNING');
   });
 
-  db.sequelize.sync({ force: false }).then(() => {
+app.use('/api', approuter);
+
+
+db.sequelize.sync({ force: false }).then(() => {
   
     app.listen(serverport, () => {
       console.log(`Server is running at http://localhost:${serverport}`);

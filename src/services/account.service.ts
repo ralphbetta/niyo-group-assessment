@@ -17,7 +17,13 @@ class AccountService {
             return { code: ApiResponse.code.conflict, body: response };
         }
         
-        const payload = await Account.create(body);
+        const accountInstance = await Account.create(body);
+
+        let payload = {
+            id: accountInstance.id,
+            username: accountInstance.username,
+            email: accountInstance.email,
+        }
 
         response = { error: false, message: ApiResponse.pass.create, data: payload }
         return { code: ApiResponse.code.success, body: response };
@@ -59,6 +65,38 @@ class AccountService {
 
     }
 
+
+    static async allAccounts(): Promise<any>{
+
+        let response: {};
+
+        const accountInstances = await Account.findAll({
+            attributes: { exclude: ['password'] }
+          });
+
+        response = { error: false, message: ApiResponse.pass.create, data: accountInstances }
+        return { code: ApiResponse.code.success, body: response };
+
+    }
+
+
+    static async accountById(id:string): Promise<any>{
+
+        let response: {};
+
+        const existingInstance = await Account.findByPk(id, {
+            attributes: { exclude: ['password'] }
+          });
+
+        if (!existingInstance) {
+            response = { error: true, message: ApiResponse.fail.not_found, data: {} }
+            return { code: ApiResponse.code.not_found, body: response };
+        }
+
+        response = { error: false, message: ApiResponse.pass.create, data: existingInstance }
+        return { code: ApiResponse.code.success, body: response };
+
+    }
 }
 
 export default AccountService;
