@@ -20,7 +20,7 @@ This project is a backend system for a task management application developed usi
 * [Conclusion](#conclusion)
 
 ## Technologies Used
-* TypeScript: For writing scalable and robust code.
+* TypeScript: For writing scalable code.
 * Node.js: JavaScript runtime for server-side development.
 * Socket.io: For real-time notifications when tasks are created.
 * Swagger: For API documentation.
@@ -134,8 +134,6 @@ NB: this should be the userId of the authenticated user
 * npm run start: Start the application.
 * npm run dev: Start the application in development mode.
 * npm run build: Compile TypeScript to JavaScript.
-* npm run lint: Run linter to check for code quality.
-
 
 ## Docker
 ### Docker Compose
