@@ -1,9 +1,17 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { Association, DataTypes, Model, Sequelize } from 'sequelize';
+import { Account } from './accout.model';
 
 class Task extends Model {
     public id!: number;
     public title!: string;
     public description!: string;
+
+    public static associations: {
+        account: Association<Task, Account>;
+    };
+    
+    public addTask!: (task: Task) => Promise<void>;
+
 }
 
 const initializeTaskModel = (sequelize: Sequelize) => {
@@ -32,4 +40,4 @@ const initializeTaskModel = (sequelize: Sequelize) => {
     return Task;
 };
 
-export default { Task, initializeTaskModel };
+export  { Task, initializeTaskModel };

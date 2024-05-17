@@ -1,11 +1,19 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
+import { Association, DataTypes, Model, Sequelize } from 'sequelize';
 import bcrypt from 'bcryptjs';
+import { Task } from './task.model';
 
 class Account extends Model {
     public id!: number;
     public username!: string;
     public email!: string;
     public password!: string;
+
+    public static associations: {
+        tasks: Association<Account, Task>;
+    };
+
+    public addTask!: (task: Task) => Promise<void>;
+    public getTasks!: () => Promise<Task[]>;
 
     public async comparePassword(password: string): Promise<boolean> {
         return bcrypt.compare(password, this.password);
@@ -61,4 +69,4 @@ const initializeAccountModel = (sequelize: Sequelize) => {
     return Account;
 };
 
-export default { Account, initializeAccountModel };
+export { Account, initializeAccountModel };
