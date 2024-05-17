@@ -1,0 +1,49 @@
+version: "3.9"
+
+services:
+
+  # DATABASES
+  psqldatabase:
+    container_name: psqldatabase_c
+    image: postgres:12
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=psqldockerdb
+      - POSTGRES_USER=psqlusername
+      - POSTGRES_PASSWORD=psqlpassword
+    volumes:
+      - psqldatabase_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # NODE SERVICE 
+  niyoassessment:
+    build: ./
+    restart: on-failure
+    container_name: niyoassessment_c
+    ports:
+      - '3035:3035'
+    environment:
+      - DB_HOST=psqldatabase
+      - DB_PORT=5432
+      - DB_NAME=psqldockerdb
+      - DB_USER=psqlusername
+      - DB_PASSWORD=psqlpassword
+      - API_PORT=3035
+      - JWT_SECRETE=niyosecrete
+    depends_on:
+      - psqldatabase
+    volumes:
+      - ./:/app
+      - /app/node_modules
+
+
+networks:
+  assessment:
+    driver: bridge
+
+
+volumes:
+  psqldatabase_data: {}
+ 

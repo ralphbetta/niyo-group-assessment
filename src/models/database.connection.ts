@@ -4,6 +4,10 @@ import {Account, initializeAccountModel} from './accout.model';
 import {Task, initializeTaskModel} from './task.model';
 import Relationships from './database.relationship';
 
+
+console.log(db_name, db_user, db_password, db_host, db_port);
+
+
 const sequelize = new Sequelize({
   database: db_name || '',
   username: db_user || '',
