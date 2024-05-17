@@ -61,9 +61,9 @@ class SocketService {
         });
     }
 
-    static publish=(payload: Task)=>{
+    static publish=(payload: Task, recipient: string)=>{
 
-        this.io.to(`${this.userId}`).emit('task', payload);
+        this.io.to(`${recipient}`).emit('task', payload);
 
     }
 

@@ -19,7 +19,7 @@ class TaskService {
         const taskInstance = await Task.create(body);
         await accountInstance.addTask(taskInstance);
 
-        SocketService.publish(taskInstance);
+        SocketService.publish(taskInstance, accountId);
  
         response = { error: false, message: ApiResponse.pass.create, data: taskInstance }
         return { code: ApiResponse.code.success, body: response };
