@@ -52,17 +52,21 @@ cd niyo-group-assessment
 
   # Go into the repository
   $ cd niyo-group-assessment
-
-  # Install all dependences
-  $ npm install
   ```
-##### 2. Set up environment variables:
-Create a .env file in the root directory and add the necessary environment variables. Refer to .env.example for guidance.
 
 ##### 3. Run the application:
   ```
   docker-compose up
   ```
+
+##### 2. Set up environment variables: (OPTIONAL) -  If you intend to run this without docker
+* Create a .env file in the root directory and add the necessary environment variables. Refer to .env.example for guidance.
+* and ensure your postgres database is running
+* you can also change database connection dialect from postgres to mysql if you're using an sql database
+```
+  # Install all dependences
+  $ npm install
+```
 
 ## Usage
 ### API Documentation
