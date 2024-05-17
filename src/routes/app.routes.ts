@@ -3,6 +3,7 @@ import AccountController from "../controllers/account.controller";
 import TokenMiddleware from "../middleware/token.middleware";
 import TaskController from "../controllers/task.controller";
 import AccountValidator from "../validators/account.validators";
+import TaskValidator from "../validators/task.validators";
 
 const router = Router();
 
@@ -16,9 +17,9 @@ router.get('/account', TokenMiddleware.verifyToken, AccountController.accountPro
 router.get('/account/:id', TokenMiddleware.verifyToken, AccountController.accountById);
 
 // SECURED TASK ROUTES
-router.post('/createtask', TokenMiddleware.verifyToken, TaskController.createTask);
+router.post('/createtask', TokenMiddleware.verifyToken, TaskValidator.payload, TaskController.createTask);
 router.get('/tasks', TokenMiddleware.verifyToken, TaskController.allTask);
-router.put('/task/update/:id', TokenMiddleware.verifyToken, TaskController.updateTask);
+router.put('/task/update/:id', TokenMiddleware.verifyToken, TaskValidator.payload, TaskController.updateTask);
 router.delete('/task/delete/:id', TokenMiddleware.verifyToken, TaskController.deleteTask);
 router.get('/task/:id', TokenMiddleware.verifyToken, TaskController.taskById);
 

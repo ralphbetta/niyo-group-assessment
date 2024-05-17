@@ -1,11 +1,20 @@
 import { Request, Response } from "express";
 import { CustomRequest } from "../interfaces";
 import TaskService from "../services/task.service";
+import { validationResult } from "express-validator";
+import ApiResponse from "../config/response.config";
 
 
 class TaskController {
 
     static async createTask(req: CustomRequest, res: Response): Promise<void> {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+             res.status(ApiResponse.code.bad_request).json({ errors: errors.array() });
+             return;
+        }
+        
         try {
             const {id}  = req.userData;
             const response = await TaskService.createTask(req.body, id);
@@ -65,6 +74,13 @@ class TaskController {
 
 
     static async updateTask(req: Request, res: Response): Promise<void> {
+
+        const errors = validationResult(req);
+        
+        if (!errors.isEmpty()) {
+             res.status(ApiResponse.code.bad_request).json({ errors: errors.array() });
+             return;
+        }
 
         const {id}  = req.params;
 
