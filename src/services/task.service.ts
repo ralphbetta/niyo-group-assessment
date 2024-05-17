@@ -1,5 +1,6 @@
 import ApiResponse from "../config/response.config";
 import { Account, Task } from "../models/database.connection";
+import SocketService from "./socket.service";
 
 class TaskService {
 
@@ -17,6 +18,8 @@ class TaskService {
 
         const taskInstance = await Task.create(body);
         await accountInstance.addTask(taskInstance);
+
+        SocketService.publish(taskInstance);
  
         response = { error: false, message: ApiResponse.pass.create, data: taskInstance }
         return { code: ApiResponse.code.success, body: response };

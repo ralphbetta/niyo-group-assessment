@@ -10,6 +10,7 @@ import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { swagger_options } from './config/swagger.config';
 import cors from 'cors';
+import SocketService from './services/socket.service';
 
 const app = express();
 
@@ -39,7 +40,10 @@ app.use('/api', approuter);
 
 db.sequelize.sync({ force: false }).then(() => {
   
-    app.listen(serverport, () => {
+   const server =  app.listen(serverport, () => {
+
+    SocketService.initialize(server);
+
       console.log(`Server is running at http://localhost:${serverport}`);
     });
   });
