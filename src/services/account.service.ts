@@ -34,6 +34,8 @@ class AccountService {
 
         let response: {};
 
+        console.log(body);
+
         const existingInstance = await Account.findOne({ where: { email: body.email } });
 
         if (!existingInstance) {
@@ -59,7 +61,7 @@ class AccountService {
             username: existingInstance.username
         }
 
-        response = { error: false, message: ApiResponse.pass.create, data: payload, token: generatedToken }
+        response = { error: false, message: ApiResponse.pass.login, data: payload, token: generatedToken }
         return { code: ApiResponse.code.success, body: response };
 
 
