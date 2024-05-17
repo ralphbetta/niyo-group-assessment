@@ -16,10 +16,10 @@ class AccountService {
             response = { error: true, message: ApiResponse.fail.account_conflict, data: {} }
             return { code: ApiResponse.code.conflict, body: response };
         }
-        
+
         const accountInstance = await Account.create(body);
 
-        let payload = {
+        const payload = {
             id: accountInstance.id,
             username: accountInstance.username,
             email: accountInstance.email,
@@ -33,8 +33,6 @@ class AccountService {
     static async loginAccount(body: any): Promise<any>{
 
         let response: {};
-
-        console.log(body);
 
         const existingInstance = await Account.findOne({ where: { email: body.email } });
 

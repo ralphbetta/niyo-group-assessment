@@ -1,32 +1,33 @@
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 import { Response, NextFunction } from 'express'; // Assuming you're using Express
 import ApiResponse from '../config/response.config';
 import { AccountData, CustomRequest } from '../interfaces';
 import { Account } from '../models/database.connection';
-import { jwtsecrete } from '../config/environment.config';
+import { JWTSECRETE } from '../config/environment.config';
 
 
 class TokenMiddleware {
 
     static generate = (userdata: AccountData) => {
 
-        return jwt.sign({ userdata }, jwtsecrete, { expiresIn: "90d" });
+        return jwt.sign({ userdata }, JWTSECRETE, { expiresIn: "90d" });
     }
 
     static verifyToken = async (req: CustomRequest, res: Response, next: NextFunction) => {
 
         try {
 
-            const token = req.headers['authorization']?.split(' ')[1];
+            const token = req.headers.authorization?.split(' ')[1];
 
             if (!token) {
                 return res.status(401).json({ message: 'Authentication failed. Token missing.' });
             }
 
-            const decoded = jwt.verify(token, jwtsecrete);
+            const decoded:any = jwt.verify(token, JWTSECRETE);
             const email = decoded.userdata.email;
 
-            const accountInstance = await Account.findOne({ where: { email: email } });
+            const accountInstance = await Account.findOne({ where: { email } });
 
             if (!accountInstance) {
                 return res.status(ApiResponse.code.unauthorized).json({ message: ApiResponse.fail.unauthorized });

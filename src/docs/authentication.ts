@@ -32,7 +32,7 @@
  *   tags:
  *   name: Authentication
  *   description: The begining of authentication process
- * 
+ *
  * /createaccount:
  *   post:
  *     summary: Create new account
@@ -64,7 +64,7 @@
  *               data: [{}]
  *       400:
  *         description: Invalid request
- * 
+ *
  * /loginaccount:
  *   post:
  *     summary: Login to account
@@ -93,7 +93,7 @@
  *               data: [{}]
  *       400:
  *         description: Invalid request
- * 
+ *
  * /accounts:
  *   get:
  *     summary: Get the list of all accounts
@@ -115,7 +115,7 @@
  *             example:
  *               error:
  *                 message: "Bad Request"
- * 
+ *
  * /account:
  *   get:
  *     summary: Get loggedin user account details by token
@@ -137,8 +137,8 @@
  *             example:
  *               error:
  *                 message: "Bad Request"
- * 
- * 
+ *
+ *
  * /account/{id}:
  *   get:
  *     summary: Get the user account by id
@@ -162,6 +162,6 @@
  *               $ref: '#/components/schemas/Authentication'
  *       404:
  *         description: The book was not found
- * 
+ *
  */
 

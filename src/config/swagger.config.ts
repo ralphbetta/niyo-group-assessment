@@ -1,6 +1,6 @@
 import { serverport } from "./environment.config";
 
-export const swagger_options = {
+export const SWAGGEROPTIONS = {
     definition: {
       openapi: "3.1.0",
       info: {
@@ -18,14 +18,14 @@ export const swagger_options = {
           email: "api@assessment.com",
         },
       },
-  
+
       servers: [
         {
           url: `http://localhost:${serverport}/api`,
           "description": "Local API Server",
         },
       ],
-  
+
       components: {
         securitySchemes: {
           BearerAuth: {
@@ -50,8 +50,7 @@ export const swagger_options = {
           apiKeyAuth: [],
         },
       ],
-  
+
     },
     apis: ["./src/docs/*.ts"],
   };
-  

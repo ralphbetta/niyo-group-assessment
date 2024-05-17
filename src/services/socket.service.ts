@@ -8,7 +8,7 @@ interface CustomSocket extends Socket {
 }
 
 class SocketService {
-  
+
     static userId: string | string[] | undefined;
     static io: Socket;
 
@@ -25,7 +25,7 @@ class SocketService {
 
         ioInstance.use(async (socket: CustomSocket, next: Function) => {
         if (socket.handshake.query) {
-            let userId = socket.handshake.query.userId;
+            const userId = socket.handshake.query.userId;
 
             socket.userId = userId;
             this.userId = userId;
@@ -48,10 +48,10 @@ class SocketService {
         socket.join(socket.userId!);
 
         socket.on("message", async (data) => {
-            let recipient = data.to;
+            const recipient = data.to;
             socket.to(recipient).emit('task', data.payload);
         });
-        
+
         socket.on("disconnect", () => {
             socket.leave(`${socket.userId}`);
             socket.userId = undefined;
@@ -69,4 +69,4 @@ class SocketService {
 
 }
 
-export default SocketService; 
+export default SocketService;

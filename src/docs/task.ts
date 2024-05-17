@@ -27,7 +27,7 @@
  *   tags:
  *   name: Task
  *   description: All Secured Task API - requires account JWTs
- * 
+ *
  * /createtask:
  *   post:
  *     summary: Create new tast
@@ -59,9 +59,9 @@
  *               data: [{}]
  *       400:
  *         description: Invalid request
- * 
- * 
- * 
+ *
+ *
+ *
  * /tasks:
  *   get:
  *     summary: Get the list of all task for this authenticated user
@@ -83,9 +83,9 @@
  *             example:
  *               error:
  *                 message: "Bad Request"
- * 
- * 
- * 
+ *
+ *
+ *
  * /task/{id}:
  *   get:
  *     summary: Get users task by taskId
@@ -109,8 +109,8 @@
  *               $ref: '#/components/schemas/Task'
  *       404:
  *         description: The book was not found
- * 
- * 
+ *
+ *
  * /task/update/{id}:
  *   put:
  *     security:
@@ -140,8 +140,8 @@
  *               data: [{}]
  *       400:
  *         description: Invalid request
- * 
- * 
+ *
+ *
  * /task/delete/{id}:
  *   delete:
  *     summary: Delete user task by taskId

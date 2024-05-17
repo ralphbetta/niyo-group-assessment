@@ -15,6 +15,6 @@ export interface AccountData {
 
 
 export interface CustomRequest extends Request {
-    userData?: any; 
+    userData?: any;
 }
-  
+

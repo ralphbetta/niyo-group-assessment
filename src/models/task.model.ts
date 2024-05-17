@@ -9,7 +9,7 @@ class Task extends Model {
     public static associations: {
         account: Association<Task, Account>;
     };
-    
+
     public addTask!: (task: Task) => Promise<void>;
 
 }
@@ -35,7 +35,7 @@ const initializeTaskModel = (sequelize: Sequelize) => {
         sequelize,
         tableName: 'tasks',
         timestamps: true
-    });    
+    });
 
     return Task;
 };

@@ -8,13 +8,13 @@ import approuter from './routes/app.routes';
 
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { swagger_options } from './config/swagger.config';
+import { SWAGGEROPTIONS } from './config/swagger.config';
 import cors from 'cors';
 import SocketService from './services/socket.service';
 
 const app = express();
 
-const cors_options = {
+const CORESOPTIONS = {
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -22,10 +22,10 @@ const cors_options = {
     preflightContinue: false,
     transports: ["websocket"],
   };
-  app.use(cors(cors_options));
+  app.use(cors(CORESOPTIONS));
 
 
-const specs = swaggerJsdoc(swagger_options);
+const specs = swaggerJsdoc(SWAGGEROPTIONS);
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(specs, { explorer: true }));
 
 app.use(bodyParser.json());
@@ -39,7 +39,7 @@ app.use('/api', approuter);
 
 
 db.sequelize.sync({ force: false }).then(() => {
-  
+
    const server =  app.listen(serverport, () => {
 
     SocketService.initialize(server);
@@ -47,5 +47,5 @@ db.sequelize.sync({ force: false }).then(() => {
       console.log(`Server is running at http://localhost:${serverport}`);
     });
   });
-  
+
   export default app;

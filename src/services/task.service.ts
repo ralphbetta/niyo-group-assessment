@@ -8,7 +8,7 @@ class TaskService {
     static async createTask(body: any, accountId: string): Promise<any>{
 
         let response: {};
-        
+
         const accountInstance = await Account.findByPk(accountId);
 
         if (!accountInstance) {
@@ -20,7 +20,7 @@ class TaskService {
         await accountInstance.addTask(taskInstance);
 
         SocketService.publish(taskInstance, accountId);
- 
+
         response = { error: false, message: ApiResponse.pass.create, data: taskInstance }
         return { code: ApiResponse.code.success, body: response };
 
@@ -92,7 +92,7 @@ static async taskById(id:string): Promise<any>{
         }
 
         const deletedInstance = await existingInstance.destroy();
-        
+
         response = { error: false, message: ApiResponse.pass.delete, data: {} }
         return { code: ApiResponse.code.success, body: response };
 

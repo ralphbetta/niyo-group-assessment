@@ -14,13 +14,12 @@ class AccountController {
              res.status(ApiResponse.code.bad_request).json({ errors: errors.array() });
              return;
         }
-        
+
         try {
             const response = await AccountService.createAccount(req.body)
             res.status(response.code).json(response.body);
         } catch (error) {
             if (error instanceof Error) {
-                console.log(error);
                 res.status(500).json({
                     error: true,
                     message: `Internal Server Error: ${error.message}`,
@@ -43,7 +42,6 @@ class AccountController {
             res.status(response.code).json(response.body);
         } catch (error) {
             if (error instanceof Error) {
-                console.log(error);
                 res.status(500).json({
                     error: true,
                     message: `Internal Server Error: ${error.message}`,
@@ -62,7 +60,6 @@ class AccountController {
             res.status(response.code).json(response.body);
         } catch (error) {
             if (error instanceof Error) {
-                console.log(error);
                 res.status(500).json({
                     error: true,
                     message: `Internal Server Error: ${error.message}`,
@@ -74,16 +71,14 @@ class AccountController {
 
     static async accountById(req: Request, res: Response): Promise<void> {
 
-        let {id}  = req.params;
+        const {id}  = req.params;
 
-        console.log()
         try {
             const response = await AccountService.accountById(id)
 
             res.status(response.code).json(response.body);
         } catch (error) {
             if (error instanceof Error) {
-                console.log(error);
                 res.status(500).json({
                     error: true,
                     message: `Internal Server Error: ${error.message}`,
@@ -95,16 +90,15 @@ class AccountController {
 
     static async accountProfile(req: CustomRequest, res: Response): Promise<void> {
 
-        let {id}  = req.userData;
+        const {id}  = req.userData;
         try {
 
             const response = await AccountService.accountById(id)
-            
+
             res.status(response.code).json(response.body);
 
         } catch (error) {
             if (error instanceof Error) {
-                console.log(error);
                 res.status(500).json({
                     error: true,
                     message: `Internal Server Error: ${error.message}`,

@@ -57,11 +57,11 @@ const initializeAccountModel = (sequelize: Sequelize) => {
         const hashedPassword = await bcrypt.hash(account.password, 10);
         account.password = hashedPassword;
       });
-    
+
       Account.prototype.comparePassword = async function (password) {
         return bcrypt.compare(password, this.password);
       };
-    
+
       Account.prototype.hashPassword = async function (password) {
         const hashedPassword = await bcrypt.hash(password, 10);
         return hashedPassword;
